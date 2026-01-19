@@ -23,7 +23,7 @@ export class CreateCourseDto {
 
     @IsJSON()
     @ApiProperty()
-    description: JSON;
+    description: any;
 
     @IsEnum(CourseStatus)
     @ApiProperty()

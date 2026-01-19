@@ -30,7 +30,8 @@ export class CourseService {
     return this.prisma.course.update({where: {id}, data: dto});
   }
 
-  remove(id: number) {
-    return this.prisma.course.delete({where: {id}});
+  async remove(id: number) {
+    await this.prisma.course.delete({where: {id}});
+    return id;
   }
 }

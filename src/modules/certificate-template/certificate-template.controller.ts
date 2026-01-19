@@ -8,8 +8,8 @@ export class CertificateTemplateController {
   constructor(private readonly certificateTemplateService: CertificateTemplateService) {}
 
   @Post()
-  create(@Body() createCertificateTemplateDto: CreateCertificateTemplateDto) {
-    return this.certificateTemplateService.create(createCertificateTemplateDto);
+  create(@Body() dto: CreateCertificateTemplateDto) {
+    return this.certificateTemplateService.create(dto);
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class CertificateTemplateController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCertificateTemplateDto: UpdateCertificateTemplateDto) {
-    return this.certificateTemplateService.update(+id, updateCertificateTemplateDto);
+  update(@Param('id') id: string, @Body() dto: UpdateCertificateTemplateDto) {
+    return this.certificateTemplateService.update(+id, dto);
   }
 
   @Delete(':id')
