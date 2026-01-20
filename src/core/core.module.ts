@@ -6,6 +6,7 @@ import { CourseModule } from 'src/modules/course/course.module';
 import { RegistrationModule } from 'src/modules/registration/registration.module';
 import { CertificateTemplateModule } from 'src/modules/certificate-template/certificate-template.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { PrismaModule } from './prisma/prisma.module';
     CourseModule,
     RegistrationModule,
     CertificateTemplateModule,
-    PrismaModule
+    PrismaModule,
+    AuthModule
   ],
   controllers: [CoreController],
   providers: [CoreService],

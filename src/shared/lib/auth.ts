@@ -1,9 +1,9 @@
+import * as dotenv from 'dotenv';
 import * as path from 'path';
 import { Pool } from 'pg';
 
 dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
 
-import * as dotenv from 'dotenv';
 import { betterAuth } from 'better-auth';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { admin, multiSession } from 'better-auth/plugins';
