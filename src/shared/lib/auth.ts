@@ -25,6 +25,7 @@ export const auth = betterAuth({
   trustedOrigins: [...(process.env.TRUSTED_ORIGINS || '').split(',')],
   emailAndPassword: { enabled: true },
   plugins: [admin(), multiSession()],
+  
   user: {
     additionalFields: {
       phone: { type: 'string' },
@@ -33,20 +34,38 @@ export const auth = betterAuth({
       specialty: { type: 'string' },
       workplace: { type: 'string' },
       jobTitle: { type: 'string' },
-      
     },
   },
+  
+  session: {
+    expiresIn: 60 * 60 * 24 * 14,
+    updateAge: 60 * 60 * 24,
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60,
+    },
+  },
+
+  socialProviders: {},
+  
+  secret: process.env.BETTER_AUTH_SECRET || 'your-secret-key-change-this',
+  
   advanced: {
-    cookies: {
-      sessionToken: {
-        attributes: {
-          sameSite: "none",
-          secure: true,
-          partitioned: true // New browser standards will mandate this for foreign cookies
-        }
-      }
+    useSecureCookies: true,
+    cookiePrefix: 'pharm-courses',
+    generateSessionToken: true,
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
+      path: '/',
     }
-  }
+  },
 });
+
+
+
+
+
 
 
