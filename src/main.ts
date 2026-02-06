@@ -16,11 +16,28 @@ async function bootstrap() {
     }),
   );
 
+  app.set('trust proxy', 1);
+  
   app.useStaticAssets(join(process.cwd(), 'upload'), { prefix: '/upload/' });
 
-  app.enableCors({ origin: [...(process.env.TRUSTED_ORIGINS || '').split(',')] });
+  // app.enableCors({ origin: [...(process.env.TRUSTED_ORIGINS || '').split(',')], credentials: true });
   // app.enableCors({ origin: true, credentials: true });
+  const allowedOrigins = (process.env.TRUSTED_ORIGINS || '')
+    .split(',')
+    .map(origin => origin.trim())
+    .filter(Boolean);
+  
+  app.enableCors({
+    origin: allowedOrigins.length > 0 ? allowedOrigins : true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['Set-Cookie'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  });
 
+  
   const config = new DocumentBuilder()
     .setTitle('Pharm couses API')
     .setDescription('This is the pharm courses API documentation')
@@ -40,3 +57,5 @@ async function bootstrap() {
   }
 }
 bootstrap();
+
+
