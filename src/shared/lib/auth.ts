@@ -33,6 +33,20 @@ export const auth = betterAuth({
       specialty: { type: 'string' },
       workplace: { type: 'string' },
       jobTitle: { type: 'string' },
+      
     },
   },
+  advanced: {
+    cookies: {
+      sessionToken: {
+        attributes: {
+          sameSite: "none",
+          secure: true,
+          partitioned: true // New browser standards will mandate this for foreign cookies
+        }
+      }
+    }
+  }
 });
+
+
